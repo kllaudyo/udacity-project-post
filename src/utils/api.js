@@ -4,3 +4,8 @@ const
     headers = {
         'Authorization': api_token
     };
+
+export const
+    getAllCategories = () =>
+        fetch(`${api_host}/categories`, { headers })
+            .then(response => response.json());
