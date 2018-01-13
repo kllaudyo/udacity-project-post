@@ -1,3 +1,7 @@
+.Menu {
+    background-color: #333;
+    overflow: hidden;
+}
 .Menu button {
     float: left;
     display: block;
