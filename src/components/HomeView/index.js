@@ -38,28 +38,35 @@ class HomeView extends Component{
         this.setState({selectedIndex:index});
     }
 
+    static renderMenuItens(categories, selectedIndex, onSelectIndex){
+        return [
+            {name:"All", path:"all"},
+            ...categories
+        ].map(({ name, path }) => (
+            <MenuItem key={path} selectedIndex={selectedIndex} index={path} onSelect={onSelectIndex}>{name}</MenuItem>
+        ));
+    }
+
+    static renderContainer(posts){
+        return posts
+            .filter(post => !post.deleted)
+            .map( ({id, author, title}) => (
+                <Link key={id} to={(`/post/${id}`)}>
+                    <Card title={author} desc={title}/>
+                </Link> )
+            )
+    }
+
     render(){
         const { selectedIndex } = this.state;
         const { categories, posts } = this.props;
         return (
             <React.Fragment>
                 <Menu>
-                    <MenuItem selectedIndex={selectedIndex} index="all" onSelect={this.onSelectIndex}>All</MenuItem>
-                    {categories
-                        .map(category => {
-                            const { name, path } = category;
-                            return ( <MenuItem key={path} selectedIndex={selectedIndex} index={path} onSelect={this.onSelectIndex}>{name}</MenuItem> )
-                        })
-                    }
+                    {HomeView.renderMenuItens(categories, selectedIndex, this.onSelectIndex)}
                 </Menu>
                 <div className="container">
-                    {posts
-                        .filter(post => !post.deleted)
-                        .map(post => {
-                            const {id, author, title} = post;
-                            return ( <Link to={(`/post/${id}`)}><Card key={id} title={author} desc={title}/></Link> )
-                        })
-                    }
+                    {HomeView.renderContainer(posts)}
                 </div>
             </React.Fragment>
         );
