@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAllPosts } from '../../utils/api';
-import { initPosts } from '../../actions';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
 import Card from "../Card";
@@ -15,17 +13,6 @@ class HomeView extends Component{
             selectedIndex: "all"
         };
         this.onSelectIndex = this.onSelectIndex.bind(this);
-    }
-
-    componentDidMount(){
-
-        const { initPosts } = this.props;
-
-        getAllPosts()
-            .then(response => {
-                initPosts(response);
-            })
-            .catch(err => console.error(err));
     }
 
     onSelectIndex(index){
@@ -74,10 +61,4 @@ const mapStateToProps = ({categories, posts}, ownProps) => ({
     ...ownProps
 });
 
-const mapDispatchToProps = dispatch => ({
-    initPosts(posts){
-        dispatch(initPosts(posts));
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default connect(mapStateToProps)(HomeView);

@@ -13,11 +13,17 @@ class App extends Component {
 
     componentDidMount(){
 
-        const { initCategories } = this.props;
+        const { initCategories, initPosts } = this.props;
 
         getAllCategories()
             .then(response => {
                 initCategories(response);
+            })
+            .catch(err => console.error(err));
+
+        getAllPosts()
+            .then(response => {
+                initPosts(response);
             })
             .catch(err => console.error(err));
     }
@@ -34,12 +40,16 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
+    state,
     ownProps
 });
 
 const mapDispatchToProps = dispatch => ({
     initCategories(categories){
         dispatch(initCategories(categories));
+    },
+    initPosts(posts){
+        dispatch(initPosts(posts));
     }
 });
 
