@@ -31,7 +31,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header brand="alert('');"/>
+                <Header brand="alert('Leitura');"/>
                 <Route exact path="/" render={() => <HomeView />} />
                 <Route path="/post/:id" render={({match}) => <PostView id={match.params.id} />} />
             </div>

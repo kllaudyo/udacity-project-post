@@ -1,5 +1,5 @@
 .Card {
-    transition: 0.3s;
+    transition: box-shadow 0.3s ease-in-out;
     margin-bottom:30px;
 }
 
