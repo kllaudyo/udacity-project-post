@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
+import { INIT_CATEGORIES } from '../actions';
 
 const categories = ( state = [], action ) => {
+    const { categories } = action;
     switch (action.type){
+        case INIT_CATEGORIES:
+            return categories;
         default:
             return state;
     }
