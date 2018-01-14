@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getAllPosts } from '../../utils/api';
+import { initPosts } from '../../actions';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
-import {getAllCategories, getAllPosts} from '../../utils/api';
-import {initCategories, initPosts} from '../../actions';
 import Card from "../Card";
 
 class HomeView extends Component{
@@ -19,13 +19,7 @@ class HomeView extends Component{
 
     componentDidMount(){
 
-        const { initCategories, initPosts } = this.props;
-
-        getAllCategories()
-            .then(response => {
-                initCategories(response);
-            })
-            .catch(err => console.error(err));
+        const { initPosts } = this.props;
 
         getAllPosts()
             .then(response => {
@@ -81,9 +75,6 @@ const mapStateToProps = ({categories, posts}, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    initCategories(categories){
-        dispatch(initCategories(categories));
-    },
     initPosts(posts){
         dispatch(initPosts(posts));
     }
