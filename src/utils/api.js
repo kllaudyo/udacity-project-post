@@ -8,4 +8,8 @@ const
 export const
     getAllCategories = () =>
         fetch(`${api_host}/categories`, { headers })
-            .then(response => response.json());
+            .then(response => response.json()),
+    getAllPosts = () =>
+        fetch(`${api_host}/posts`, { headers })
+            .then(response => response.json())
+            .then(response => ({posts: response}));
