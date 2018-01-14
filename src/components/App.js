@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 import Header from './Header';
@@ -12,10 +12,10 @@ class App extends Component {
             <div className="App">
                 <Header brand="alert('');"/>
                 <Route exact path="/" render={() => <HomeView />} />
-                <Route path="/:id" render={({match}) => <PostView id={match.params.id} />} />
+                <Route path="/post/:id" render={({match}) => <PostView id={match.params.id} />} />
             </div>
         );
     }
 }
 
-export default connect()(App);
+export default withRouter(connect()(App));

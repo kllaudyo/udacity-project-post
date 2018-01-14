@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
 import {getAllCategories, getAllPosts} from '../../utils/api';
@@ -40,21 +41,25 @@ class HomeView extends Component{
     render(){
         const { selectedIndex } = this.state;
         const { categories, posts } = this.props;
-        console.log(this.props);
         return (
             <React.Fragment>
                 <Menu>
                     <MenuItem selectedIndex={selectedIndex} index="all" onSelect={this.onSelectIndex}>All</MenuItem>
-                    {categories.map(category => {
-                        const { name, path } = category;
-                        return ( <MenuItem key={path} selectedIndex={selectedIndex} index={path} onSelect={this.onSelectIndex}>{name}</MenuItem> )
-                    })}
+                    {categories
+                        .map(category => {
+                            const { name, path } = category;
+                            return ( <MenuItem key={path} selectedIndex={selectedIndex} index={path} onSelect={this.onSelectIndex}>{name}</MenuItem> )
+                        })
+                    }
                 </Menu>
                 <div className="container">
-                    {posts.filter(post => !post.deleted).map(post => {
-                        const {id, author, title} = post;
-                        return ( <Card key={id} title={author} desc={title}/> )
-                    })}
+                    {posts
+                        .filter(post => !post.deleted)
+                        .map(post => {
+                            const {id, author, title} = post;
+                            return ( <Link to={(`/post/${id}`)}><Card key={id} title={author} desc={title}/></Link> )
+                        })
+                    }
                 </div>
             </React.Fragment>
         );
