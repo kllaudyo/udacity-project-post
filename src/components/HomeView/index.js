@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
-import { getAllCategories } from '../../utils/api';
-import { initCategories } from '../../actions';
+import {getAllCategories, getAllPosts} from '../../utils/api';
+import {initCategories, initPosts} from '../../actions';
+import Card from "../Card";
 
 class HomeView extends Component{
 
@@ -17,7 +18,7 @@ class HomeView extends Component{
 
     componentDidMount(){
 
-        const { initCategories } = this.props;
+        const { initCategories, initPosts } = this.props;
 
         getAllCategories()
             .then(response => {
@@ -25,6 +26,11 @@ class HomeView extends Component{
             })
             .catch(err => console.error(err));
 
+        getAllPosts()
+            .then(response => {
+                initPosts(response);
+            })
+            .catch(err => console.error(err));
     }
 
     onSelectIndex(index){
@@ -33,7 +39,8 @@ class HomeView extends Component{
 
     render(){
         const { selectedIndex } = this.state;
-        const { categories } = this.props;
+        const { categories, posts } = this.props;
+        console.log(this.props);
         return (
             <React.Fragment>
                 <Menu>
@@ -44,7 +51,10 @@ class HomeView extends Component{
                     })}
                 </Menu>
                 <div className="container">
-                    Todos posts
+                    {posts.filter(post => !post.deleted).map(post => {
+                        const {id, author, title} = post;
+                        return ( <Card key={id} title={author} desc={title}/> )
+                    })}
                 </div>
             </React.Fragment>
         );
@@ -52,14 +62,18 @@ class HomeView extends Component{
 
 }
 
-const mapStateToProps = ({categories}, ownProps) => ({
+const mapStateToProps = ({categories, posts}, ownProps) => ({
     categories,
+    posts,
     ...ownProps
 });
 
 const mapDispatchToProps = dispatch => ({
     initCategories(categories){
         dispatch(initCategories(categories));
+    },
+    initPosts(posts){
+        dispatch(initPosts(posts));
     }
 });
 
