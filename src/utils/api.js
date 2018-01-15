@@ -12,4 +12,7 @@ export const
     getAllPosts = () =>
         fetch(`${api_host}/posts`, { headers })
             .then(response => response.json())
-            .then(response => ({posts: response}));
+            .then(response => ({posts: response})),
+    getCommentsByPost = (post_id) =>
+        fetch(`${api_host}/posts/${post_id}/comments`, { headers })
+            .then(response => response.json());
