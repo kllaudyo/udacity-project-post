@@ -13,7 +13,8 @@ class HomeView extends Component{
     }
 
     onSelectIndex(index){
-        this.props.history.push(`/category/${index}`);
+        const route = index === "all" ? "/" : `/category/${index}`;
+        this.props.history.push(route);
     }
 
     static renderMenuItens(categories, selectedIndex, onSelectIndex){
