@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import sortBy from 'sort-by';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
 import Card from "../Card";
@@ -38,6 +39,7 @@ class HomeView extends Component{
 
     render(){
         const { categories, posts, path = "all" } = this.props;
+        posts.sort(sortBy('-voteScore'));
         return (
             <React.Fragment>
                 <Menu>
