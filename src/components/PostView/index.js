@@ -10,7 +10,6 @@ import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
 import Comment from '../Comment';
 
-
 class PostView extends Component{
 
     constructor(props){
@@ -35,7 +34,7 @@ class PostView extends Component{
         return (
             <React.Fragment>
                 <Menu>
-                    <MenuItem onSelect={() => history.push('/') } selectedIndex={null} index="back" ><ArrowLeftIcon color="white"/></MenuItem>
+                    <MenuItem onSelect={() => history.goBack() } selectedIndex={null} index="back" ><ArrowLeftIcon color="white"/></MenuItem>
                     <MenuItem onSelect={()=>alert('teste click')} selectedIndex={null} index="thumb-up" ><ThumbsUpIcon color="white" /></MenuItem>
                     <MenuItem onSelect={()=>alert('teste click')} selectedIndex={null} index="thumb-down" ><ThumbsDownIcon color="white" /></MenuItem>
                 </Menu>

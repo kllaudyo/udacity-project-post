@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Menu from '../Menu/Menu';
 import MenuItem from '../Menu/MenuItem';
 import Card from "../Card";
@@ -9,14 +9,11 @@ class HomeView extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            selectedIndex: "all"
-        };
         this.onSelectIndex = this.onSelectIndex.bind(this);
     }
 
     onSelectIndex(index){
-        this.setState({selectedIndex:index});
+        this.props.history.push(`/category/${index}`);
     }
 
     static renderMenuItens(categories, selectedIndex, onSelectIndex){
@@ -28,9 +25,9 @@ class HomeView extends Component{
         ));
     }
 
-    static renderContainer(posts){
+    static renderContainer(posts, path){
         return posts
-            .filter(post => !post.deleted)
+            .filter(post => !post.deleted && (post.category === path || path === "all") )
             .map( ({id, author, title}) => (
                 <Link key={id} to={(`/post/${id}`)}>
                     <Card title={author} desc={title}/>
@@ -39,15 +36,14 @@ class HomeView extends Component{
     }
 
     render(){
-        const { selectedIndex } = this.state;
-        const { categories, posts } = this.props;
+        const { categories, posts, path = "all" } = this.props;
         return (
             <React.Fragment>
                 <Menu>
-                    {HomeView.renderMenuItens(categories, selectedIndex, this.onSelectIndex)}
+                    {HomeView.renderMenuItens(categories, path, this.onSelectIndex)}
                 </Menu>
                 <div className="container">
-                    {HomeView.renderContainer(posts)}
+                    {HomeView.renderContainer(posts, path)}
                 </div>
             </React.Fragment>
         );
@@ -61,4 +57,4 @@ const mapStateToProps = ({categories, posts}, ownProps) => ({
     ...ownProps
 });
 
-export default connect(mapStateToProps)(HomeView);
+export default withRouter(connect(mapStateToProps)(HomeView));
