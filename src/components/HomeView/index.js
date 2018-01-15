@@ -14,8 +14,7 @@ class HomeView extends Component{
     }
 
     onSelectIndex(index){
-        const route = index === "all" ? "/" : `/category/${index}`;
-        this.props.history.push(route);
+        this.props.history.push(index === "all" ? "/" : `/category/${index}`);
     }
 
     static renderMenuItens(categories, selectedIndex, onSelectIndex){
@@ -39,14 +38,13 @@ class HomeView extends Component{
 
     render(){
         const { categories, posts, path = "all" } = this.props;
-        posts.sort(sortBy('-voteScore'));
         return (
             <React.Fragment>
                 <Menu>
                     {HomeView.renderMenuItens(categories, path, this.onSelectIndex)}
                 </Menu>
                 <div className="container">
-                    {HomeView.renderContainer(posts, path)}
+                    {HomeView.renderContainer(posts.sort(sortBy('-voteScore')), path)}
                 </div>
             </React.Fragment>
         );
