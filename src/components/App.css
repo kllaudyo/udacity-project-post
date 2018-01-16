@@ -10,7 +10,7 @@
     right: 25px;
     bottom: 25px;
 }
-.fab-button-add a {
+.fab-button-add button {
     display: block;
     width: 50px;
     height: 50px;
@@ -22,4 +22,29 @@
     background-size: 28px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     font-size: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.modal {
+    position: absolute;
+    top: 40px;
+    left: 200px;
+    right: 200px;
+    bottom: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    outline: none;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
+    min-width: 500px;
 }
