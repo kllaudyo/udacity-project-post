@@ -1,5 +1,5 @@
 .Menu {
-    background-color: #333;
+    background-color: #2196F3;
     overflow: hidden;
 }
 .Menu button {
@@ -14,6 +14,15 @@
     outline:none;
     border-bottom: 3px solid transparent;
     background-color: transparent;
+}
+
+.Menu select{
+    float:right;
+    margin-top:10px;
+    margin-right: 10px;
+    padding:5px;
+    padding-left: 8px;
+    border-radius: 20px;
 }
 
 .Menu button:hover {

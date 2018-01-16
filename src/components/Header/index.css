@@ -2,22 +2,25 @@
 
 .Header{
     display: block;
-    background-color: #333;
+    background-color: #2196F3;
     line-height: 50px;
     height: 50px;
 }
 
 .Header h1{
-    padding: 5px;
-    color: #b27546;
+    padding: 10px;
+    color: #fff;
     font-family: 'Yanone Kaffeesatz', sans-serif;
+    margin:0;
 }
 
 .Header .logo{
     display: block;
-    text-indent: 50px;
-    width: 34px;
-    height: 34px;
+    text-indent: 60px;
+    width: 50px;
+    height: 50px;
     background: url(logo.svg);
-    background-size: 44px 44px;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
 }

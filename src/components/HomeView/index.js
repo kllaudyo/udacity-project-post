@@ -42,6 +42,10 @@ class HomeView extends Component{
             <React.Fragment>
                 <Menu>
                     {HomeView.renderMenuItens(categories, path, this.onSelectIndex)}
+                    <select>
+                        <option>Vote score</option>
+                        <option>Date</option>
+                    </select>
                 </Menu>
                 <div className="container">
                     {HomeView.renderContainer(posts.sort(sortBy('-voteScore')), path)}
