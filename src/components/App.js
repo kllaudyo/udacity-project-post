@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllCategories, getAllPosts } from '../utils/api';
 import { initCategories, initPosts } from '../actions';
@@ -35,6 +35,7 @@ class App extends Component {
                 <Route exact path="/" render={() => <HomeView />} />
                 <Route exact path="/category/:path" render={({match}) => <HomeView path={match.params.path} />} />
                 <Route path="/post/:id" render={({match}) => <PostView id={match.params.id} />} />
+                <div className="fab-button-add"><Link to="/post/">Adicionar</Link></div>
             </div>
         );
     }
